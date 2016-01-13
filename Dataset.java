@@ -1,12 +1,12 @@
 /*
- * ì¬“ú: 2004/01/18
+ * ä½œæˆæ—¥: 2004/01/18
  * $Id: Dataset.java,v 1.2 2004/01/18 23:41:34 matsu Exp $
  */
 
 /**
  * @author matsu
  *
- * ƒjƒ…[ƒ‰ƒ‹ƒlƒbƒgƒ[ƒN‚Ö“n‚·ƒf[ƒ^ƒZƒbƒg
+ * ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯ã¸æ¸¡ã™ãƒ‡ãƒ¼ã‚¿ã‚»ãƒƒãƒˆ
  */
 public class Dataset {
 	private double[] input;

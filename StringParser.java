@@ -3,15 +3,15 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 /*
- * ì¬“ú: 2004/01/17
+ * ä½œæˆæ—¥: 2004/01/17
  *
- * ƒtƒ@ƒCƒ‹‚©‚ç•¶š‚ğ“Ç‚İ‚ñ‚ÅChashcode‚ğo—Í
+ * ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æ–‡å­—ã‚’èª­ã¿è¾¼ã‚“ã§ï¼Œhashcodeã‚’å‡ºåŠ›
  */
 
 /**
  * @author matsu
  *
- * ƒeƒXƒgƒR[ƒh
+ * ãƒ†ã‚¹ãƒˆã‚³ãƒ¼ãƒ‰
  */
 public class StringParser {
 	public static void main(String args[]) {

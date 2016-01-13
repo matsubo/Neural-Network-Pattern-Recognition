@@ -19,23 +19,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /*
- * ì¬“ú: 2004/01/18
- *@$Id: Gui.java,v 1.4 2004/01/19 09:40:57 matsu Exp $
+ * ä½œæˆæ—¥: 2004/01/18
+ *ã€€$Id: Gui.java,v 1.4 2004/01/19 09:40:57 matsu Exp $
  */
 
 /**
  * @author matsu
  *
- * •¶š”F¯GUI‚ÆControl
+ * æ–‡å­—èªè­˜GUIã¨Control
  */
 public class Gui
 	extends JFrame
 	implements MouseMotionListener, ActionListener {
 
-	/** ”F¯•¶š•\¦—Ìˆæ*/
+	/** èªè­˜æ–‡å­—è¡¨ç¤ºé ˜åŸŸ*/
 	private JTextField text = new JTextField();
 
-	/** •¶š”F¯ƒpƒlƒ‹ */
+	/** æ–‡å­—èªè­˜ãƒ‘ãƒãƒ« */
 	private JPanel field_panel;
 
 	/** mode */
@@ -44,19 +44,19 @@ public class Gui
 	/** mode */
 	private JButton recognition_button = new JButton("Recognition mode");
 
-	/** ƒŠƒZƒbƒgƒ{ƒ^ƒ“ */
+	/** ãƒªã‚»ãƒƒãƒˆãƒœã‚¿ãƒ³ */
 	private JButton reset_button = new JButton("RESET");
 
-	/** OKƒ{ƒ^ƒ“ */
+	/** OKãƒœã‚¿ãƒ³ */
 	private JButton ok_button = new JButton("OK");
 
-	/** “š‚¦•\¦ƒpƒlƒ‹ */
+	/** ç­”ãˆè¡¨ç¤ºãƒ‘ãƒãƒ« */
 	private JPanel text_panel = new JPanel();
 
-	/** •¶š‘I‘ğƒpƒlƒ‹ */
+	/** æ–‡å­—é¸æŠãƒ‘ãƒãƒ« */
 	private JPanel select_panel;
 
-	/** ƒZƒŒƒNƒgƒ{ƒbƒNƒX */
+	/** ã‚»ãƒ¬ã‚¯ãƒˆãƒœãƒƒã‚¯ã‚¹ */
 	private JComboBox select;
 
 	/** Container */
@@ -65,10 +65,10 @@ public class Gui
 	/** NeuralNetwork */
 	private NeuralNetwork neural;
 	
-	/** ŠwKƒf[ƒ^ */
+	/** å­¦ç¿’ãƒ‡ãƒ¼ã‚¿ */
 	Vector vector = new Vector();
 
-	// ƒAƒ‹ƒtƒ@ƒxƒbƒg”z—ñ
+	// ã‚¢ãƒ«ãƒ•ã‚¡ãƒ™ãƒƒãƒˆé…åˆ—
 	private static final String[] alpha_array =
 		new String[] {
 			"A",
@@ -98,34 +98,34 @@ public class Gui
 			"Y",
 			"Z" };
 
-	/** ¡–Ú */
+	/** å‡ç›® */
 	private static final int x = 8;
-	/** ¡–Ú */
+	/** å‡ç›® */
 	private static final int y = 8;
 
-	/** ˆê¡‚Ì‘å‚«‚³ */
+	/** ä¸€å‡ã®å¤§ãã• */
 	private static final int x_width = 20;
 
-	/** ˆê¡‚Ì‘å‚«‚³ */
+	/** ä¸€å‡ã®å¤§ãã• */
 	private static final int y_width = 20;
 
-	/** ‰½ŒÂŒó•â‚ğ•\¦‚·‚é‚© */
+	/** ä½•å€‹å€™è£œã‚’è¡¨ç¤ºã™ã‚‹ã‹ */
 	private static final int DISP = 5;
 
-	/** ŠwKƒf[ƒ^ */
+	/** å­¦ç¿’ãƒ‡ãƒ¼ã‚¿ */
 	private static final String learning_file = "learning.txt";
 
-	/** “ü—Íî•ñŠi”[ */
+	/** å…¥åŠ›æƒ…å ±æ ¼ç´ */
 	private int[][] input = new int[x][y];
 
-	/** ƒ‚[ƒh’è‹` */
+	/** ãƒ¢ãƒ¼ãƒ‰å®šç¾© */
 	public static final int LEARNING = 0;
 	public static final int RECOGNITION = 1;
 
-	/** ƒ‚[ƒh */
+	/** ãƒ¢ãƒ¼ãƒ‰ */
 	private int mode = 0;
 	
-	/** ƒtƒ@ƒCƒ‹‚©‚çŠwK‚·‚é‚© */
+	/** ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰å­¦ç¿’ã™ã‚‹ã‹ */
 	private static boolean LEARN_FROM_FILE = false;
 
 	/**
@@ -142,7 +142,7 @@ public class Gui
 	}
 
 	/**
-	 * GUIì¬
+	 * GUIä½œæˆ
 	 *
 	 */
 	public Gui() {
@@ -150,16 +150,16 @@ public class Gui
 
 		init();
 
-		// ƒjƒ…[ƒ‰ƒ‹ƒlƒbƒgƒ[ƒN
+		// ãƒ‹ãƒ¥ãƒ¼ãƒ©ãƒ«ãƒãƒƒãƒˆãƒ¯ãƒ¼ã‚¯
 		neural = new NeuralNetwork();
 		if(LEARN_FROM_FILE == true)
 			study();
 
-		// ƒTƒCƒYİ’è
+		// ã‚µã‚¤ã‚ºè¨­å®š
 		//setBounds(50, 50, 300, 500);
 		//setSize(300,500);
 
-		// Container‚ğæ“¾
+		// Containerã‚’å–å¾—
 		c = getContentPane();
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 
@@ -176,7 +176,7 @@ public class Gui
 	}
 
 	/**
-	 * ‰Šú‰»
+	 * åˆæœŸåŒ–
 	 * @return
 	 */
 	public void init() {
@@ -187,7 +187,7 @@ public class Gui
 	}
 
 	/**
-	 * ƒ‚[ƒh‘I‘ğ
+	 * ãƒ¢ãƒ¼ãƒ‰é¸æŠ
 	 * @return
 	 */
 	public Container makeButtonPane() {
@@ -203,7 +203,7 @@ public class Gui
 	}
 
 	/**
-	 * ŠwK‚³‚¹‚é•¶š‘I‘ğ
+	 * å­¦ç¿’ã•ã›ã‚‹æ–‡å­—é¸æŠ
 	 * @return
 	 */
 	public Container makeSelectBox() {
@@ -219,7 +219,7 @@ public class Gui
 	}
 
 	/**
-	 * Œ‹‰Ê•\¦—Ìˆæ
+	 * çµæœè¡¨ç¤ºé ˜åŸŸ
 	 * @return
 	 */
 	public Container makeDisplayLine() {
@@ -232,25 +232,25 @@ public class Gui
 	}
 
 	/**
-	 * “ü—ÍƒtƒB[ƒ‹ƒh
+	 * å…¥åŠ›ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
 	 * @return
 	 */
 	public Container makeField() {
 		field_panel = new JPanel() {
 			public void paintComponent(Graphics g) {
-					// ¡–Ú•`‰æ
+					// å‡ç›®æç”»
 	for (int i = 0; i <= x; i++) {
-					// cü
+					// ç¸¦ç·š
 					g.drawLine(i * x_width, 0, i * x_width, y * y_width);
-					// ‰¡ü
+					// æ¨ªç·š
 					g.drawLine(0, i * x_width, x * x_width, i * x_width);
 				}
 
-				// F•`‰æ
+				// è‰²æç”»
 				for (int i = 0; i < x; i++) {
 					for (int j = 0; j < y; j++) {
 						if (input[i][j] == 0) {
-							//”’
+							//ç™½
 							g.setColor(Color.WHITE);
 						} else {
 							g.setColor(Color.BLACK);
@@ -275,7 +275,7 @@ public class Gui
 	}
 
 	/**
-	 * OKƒ{ƒ^ƒ“
+	 * OKãƒœã‚¿ãƒ³
 	 * @return
 	 */
 	public Container makeButton() {
@@ -290,7 +290,7 @@ public class Gui
 	}
 
 	/**
-	 * ƒ‚[ƒh‚ğ•Ï‚¦‚é
+	 * ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰ãˆã‚‹
 	 *
 	 */
 	public void changeMode(int next_mode) {
@@ -308,7 +308,7 @@ public class Gui
 	}
 
 	/**
-	 * ŠwK
+	 * å­¦ç¿’
 	 */
 	public void study() {
 		Log.info("<-- Learn from data");
@@ -316,12 +316,12 @@ public class Gui
 		Vector _vector = new Vector();
 
 		try {
-			// ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ
+			// ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã¿
 			BufferedReader br =
 				new BufferedReader(
 					new InputStreamReader(new FileInputStream(learning_file)));
 
-			// ŠwKƒf[ƒ^ì¬
+			// å­¦ç¿’ãƒ‡ãƒ¼ã‚¿ä½œæˆ
 			String msg;
 			int i = 0;
 			while ((msg = br.readLine()) != null) {
@@ -358,11 +358,11 @@ public class Gui
 	}
 
 	/**
-	 * ƒ}ƒEƒXƒAƒNƒVƒ‡ƒ“
+	 * ãƒã‚¦ã‚¹ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 	 */
 	public void mouseDragged(MouseEvent e) {
 
-		// ƒNƒŠƒbƒNêŠ¯•Ê
+		// ã‚¯ãƒªãƒƒã‚¯å ´æ‰€è­˜åˆ¥
 		if (e.getSource().equals(field_panel)) {
 			if (e.getX() < x * x_width
 				&& e.getY() < y * y_width
@@ -377,14 +377,14 @@ public class Gui
 	}
 
 	/**
-	 * ƒ}ƒEƒXƒAƒNƒVƒ‡ƒ“
+	 * ãƒã‚¦ã‚¹ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 	 */
 	public void mouseMoved(MouseEvent e) {
 		//Log.debug(e.toString());
 	}
 
 	/**
-	 * ƒ{ƒ^ƒ“ƒAƒNƒVƒ‡ƒ“
+	 * ãƒœã‚¿ãƒ³ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
 	 */
 	public void actionPerformed(ActionEvent e) {
 		// Reset
@@ -400,14 +400,14 @@ public class Gui
 				double[] _teach = new double[alpha_array.length];
 				double[] _input = new double[x * y];
 
-				// Inputƒf[ƒ^
+				// Inputãƒ‡ãƒ¼ã‚¿
 				for (int i = 0; i < x; i++)
 					for (int j = 0; j < y; j++) {
 						_input[i * x + j] = input[i][j];
 						System.out.print(input[i][j]);
 					}
 
-				// ‹³tƒf[ƒ^
+				// æ•™å¸«ãƒ‡ãƒ¼ã‚¿
 				for (int i = 0; i < alpha_array.length; i++) {
 					_teach[i] = 0;
 					if (select.getSelectedIndex() == i)
@@ -418,7 +418,7 @@ public class Gui
 
 				vector.add(dataset);
 
-				// ŠwK
+				// å­¦ç¿’
 				neural.learn(vector);
 				
 				init();
@@ -427,17 +427,17 @@ public class Gui
 			} else if (mode == RECOGNITION) {
 				double[] _input = new double[x * y];
 
-				// Inputƒf[ƒ^
+				// Inputãƒ‡ãƒ¼ã‚¿
 				for (int i = 0; i < x; i++)
 					for (int j = 0; j < y; j++)
 						_input[i * x + j] = input[i][j];
 
 				Dataset dataset = new Dataset(_input);
 
-				// ”F¯
+				// èªè­˜
 				neural.forward(dataset);
 
-				// Œ‹‰Êæ“¾
+				// çµæœå–å¾—
 				double[] result = neural.getResult();
 
 				// Sort

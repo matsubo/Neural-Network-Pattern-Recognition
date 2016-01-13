@@ -2,71 +2,71 @@ import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Vector;
 /*
- * Ќмђ¬“ъ: 2004/01/18
+ * дЅњж€ђж—Ґ: 2004/01/18
  * $Id: NeuralNetwork.java,v 1.3 2004/01/19 09:40:58 matsu Exp $
  */
 
 /**
  * @author matsu
  *
- * ѓjѓ…Ѓ[ѓ‰ѓ‹ѓlѓbѓgѓЏЃ[ѓN
+ * гѓ‹гѓҐгѓјгѓ©гѓ«гѓЌгѓѓгѓ€гѓЇгѓјг‚Ї
  */
 public class NeuralNetwork implements Serializable{
 
-	/** “ь—Н‘w‚Мђ” */
+	/** е…ҐеЉ›е±¤гЃ®ж•° */
 	private int IN = 8 * 8;
-	/** ‰B‚к‘w‚Мђ” */
+	/** йљ г‚Ње±¤гЃ®ж•° */
 	private int HID = 8 * 8;
-	/** Џo—Н‘w‚Мђ” */
+	/** е‡єеЉ›е±¤гЃ®ж•° */
 	private int OUT = 26;
 
-	/** ‚±‚к€И‰є‚МЊлЌ·‚И‚зЋы‘© */
+	/** гЃ“г‚Њд»Ґдё‹гЃ®иЄ¤е·®гЃЄг‚‰еЏЋжќџ */
 	private double ERR_LIMIT = 0.1;
 
 	private double ALPHA = 0.4;
 	private double BETA = 0.3;
 
-	/** ЉwЏK‰сђ”‚МЌЕ‘е’l */
+	/** е­¦зї’е›ћж•°гЃ®жњЂе¤§еЂ¤ */
 	private double TIMES = 50000;
 
-	/** “ь—Н‘w‚МЏo—Н’l */
+	/** е…ҐеЉ›е±¤гЃ®е‡єеЉ›еЂ¤ */
 	private double[] I = new double[IN];
-	/** ‰B‚к‘w‚МЏo—Н’l */
+	/** йљ г‚Ње±¤гЃ®е‡єеЉ›еЂ¤ */
 	private double[] H = new double[HID];
-	/** Џo—Н‘w‚МЏo—Н’l */
+	/** е‡єеЉ›е±¤гЃ®е‡єеЉ›еЂ¤ */
 	private double[] O = new double[OUT];
 
-	/** “ь—Н‘w‚Ж‰B‚к‘wЉФ‚МЏd‚Э */
+	/** е…ҐеЉ›е±¤гЃЁйљ г‚Ње±¤й–“гЃ®й‡ЌгЃї */
 	private double[][] W = new double[HID][IN];
-	/** ‰B‚к‘w‚ЖЏo—Н‘wЉФ‚МЏd‚Э */
+	/** йљ г‚Ње±¤гЃЁе‡єеЉ›е±¤й–“гЃ®й‡ЌгЃї */
 	private double[][] V = new double[OUT][HID];
 
-	/** ‰B‚к‘w‚Ми‡’l */
+	/** йљ г‚Ње±¤гЃ®й–ѕеЂ¤ */
 	private double[] theta = new double[HID];
-	/** Џo—Н‘w‚Ми‡’l */
+	/** е‡єеЉ›е±¤гЃ®й–ѕеЂ¤ */
 	private double[] gamma = new double[OUT];
 
-	/** Џo—Н‘w‚МЏo—Н’l‚Ж‹іЋtђMЌ†‚МЊлЌ· */
+	/** е‡єеЉ›е±¤гЃ®е‡єеЉ›еЂ¤гЃЁж•™её«дїЎеЏ·гЃ®иЄ¤е·® */
 	private double[] delta = new double[OUT];
-	/** ‰B‚к‘w‚МЏo—Н’l‚ЖЏo—Н‘w‚©‚з–Я‚Б‚Д‚«‚Ѕ’l‚МЊлЌ· */
+	/** йљ г‚Ње±¤гЃ®е‡єеЉ›еЂ¤гЃЁе‡єеЉ›е±¤гЃ‹г‚‰ж€»гЃЈгЃ¦гЃЌгЃџеЂ¤гЃ®иЄ¤е·® */
 	private double[] sigma = new double[HID];
-	/** ‹іЋtђMЌ† */
+	/** ж•™её«дїЎеЏ· */
 	private double[] T = new double[OUT];
 
 	/**
-	 * Џd‚Э‚рЏ‰Љъ‰»‚·‚й
+	 * й‡ЌгЃїг‚’е€ќжњџеЊ–гЃ™г‚‹
 	 */
 	public void initWeight(double[][] w) {
 		for (int i = 0; i < w.length; i++) {
 			for (int j = 0; j < w[i].length; j++) {
-				// [-0.1, 0.1] ‚М—ђђ”
+				// [-0.1, 0.1] гЃ®д№±ж•°
 				w[i][j] = (Math.random() - 0.5) * 2.0;
 			}
 		}
 	}
 
 	/**
-	 * Џd‚Э‚р•\Ћ¦‚·‚й
+	 * й‡ЌгЃїг‚’иЎЁз¤єгЃ™г‚‹
 	 */
 	public void showWeight(double[][] w) {
 		for (int i = 0; i < w.length; i++) {
@@ -78,17 +78,17 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * и‡’l‚рЏ‰Љъ‰»‚·‚й
+	 * й–ѕеЂ¤г‚’е€ќжњџеЊ–гЃ™г‚‹
 	 */
 	public void initThreshold(double[] threshold) {
 		for (int i = 0; i < threshold.length; i++) {
-			// [-0.1, 0.1] ‚М—ђђ”
+			// [-0.1, 0.1] гЃ®д№±ж•°
 			threshold[i] = (Math.random() - 0.5) * 2.0;
 		}
 	}
 
 	/**
-	 * и‡’l‚р•\Ћ¦‚·‚й
+	 * й–ѕеЂ¤г‚’иЎЁз¤єгЃ™г‚‹
 	 */
 	private void showThreshold(double[] threshold) {
 		for (int i = 0; i < threshold.length; i++) {
@@ -98,23 +98,23 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * ѓVѓOѓ‚ѓCѓhЉЦђ”
+	 * г‚·г‚°гѓўг‚¤гѓ‰й–ўж•°
 	 */
 	private double sigmoid(double x) {
 		return 1.0 / (1 + Math.exp(-x));
 	}
 
 	/**
-	 * ЋАЊ±
+	 * е®џйЁ“
 	 */
 	public void forward(Dataset d) {
-		// “ь—Н‘w‚МЏo—Н‚р‹Ѓ‚Я‚й
+		// е…ҐеЉ›е±¤гЃ®е‡єеЉ›г‚’ж±‚г‚Ѓг‚‹
 		for (int i = 0; i < IN; i++) {
 			Log.debug(String.valueOf(i));
 			I[i] = d.getInput(i);
 		}
 
-		// ’†ЉФ‘w‚МЏo—Н‚р‹Ѓ‚Я‚й
+		// дё­й–“е±¤гЃ®е‡єеЉ›г‚’ж±‚г‚Ѓг‚‹
 		for (int j = 0; j < HID; j++) {
 			double temp = 0.0;
 			for (int i = 0; i < IN; i++)
@@ -123,7 +123,7 @@ public class NeuralNetwork implements Serializable{
 			H[j] = sigmoid(temp);
 		}
 
-		// Џo—Н‘w‚МЏo—Н‚р‹Ѓ‚Я‚й
+		// е‡єеЉ›е±¤гЃ®е‡єеЉ›г‚’ж±‚г‚Ѓг‚‹
 		for (int k = 0; k < OUT; k++) {
 			double temp = 0.0;
 			for (int j = 0; j < HID; j++)
@@ -134,30 +134,30 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * ѓRЃ[ѓ`
+	 * г‚ігѓјгѓЃ
 	 */
 	public double back(Dataset data) {
 		double error = 0.0;
-		// Џo—Н‘w‚МЊлЌ·‚МЊvЋZ
+		// е‡єеЉ›е±¤гЃ®иЄ¤е·®гЃ®иЁ€з®—
 		for (int k = 0; k < OUT; k++) {
 			T[k] = data.getTech(k);
 			error += Math.abs(T[k] - O[k]);
 			delta[k] = (T[k] - O[k]) * O[k] * (1 - O[k]);
 		}
-		// ‰B‚к‘w‚МЊлЌ·‚МЊvЋZ
+		// йљ г‚Ње±¤гЃ®иЄ¤е·®гЃ®иЁ€з®—
 		for (int j = 0; j < HID; j++) {
 			double temp = 0.0;
 			for (int k = 0; k < OUT; k++)
 				temp += delta[k] * V[k][j];
 			sigma[j] = temp * H[j] * (1 - H[j]);
 		}
-		// ‰B‚к‘w‚ЖЏo—Н‘wЉФ‚МЏd‚ЭЌXђV
+		// йљ г‚Ње±¤гЃЁе‡єеЉ›е±¤й–“гЃ®й‡ЌгЃїж›ґж–°
 		for (int k = 0; k < OUT; k++) {
 			for (int j = 0; j < HID; j++)
 				V[k][j] += ALPHA * delta[k] * H[j];
 			gamma[k] += BETA * delta[k];
 		}
-		// “ь—Н‘w‚Ж‰B‚к‘wЉФ‚МЏd‚ЭЌXђV
+		// е…ҐеЉ›е±¤гЃЁйљ г‚Ње±¤й–“гЃ®й‡ЌгЃїж›ґж–°
 		for (int j = 0; j < HID; j++) {
 			for (int i = 0; i < IN; i++)
 				W[j][i] += ALPHA * sigma[j] * I[i];
@@ -168,7 +168,7 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * data‚рЉwЏK‚·‚й 
+	 * dataг‚’е­¦зї’гЃ™г‚‹ 
 	 */
 	public void learn(Vector dataset) {
 		Log.info("<-- Learn");
@@ -176,7 +176,7 @@ public class NeuralNetwork implements Serializable{
 		for (int loop = 0; loop < TIMES; loop++) {
 			double error = 0.0;
 
-			// ЉwЏK
+			// е­¦зї’
 			for (Enumeration e = dataset.elements(); e.hasMoreElements();) {
 				Dataset _dataset = (Dataset) e.nextElement();
 				forward(_dataset);
@@ -186,7 +186,7 @@ public class NeuralNetwork implements Serializable{
 			if(loop % 100 == 0)
 				Log.info(loop + ": " + error);
 
-			// Ћы‘©‚µ‚Ѕ‚зЉwЏK‚рЏI—№
+			// еЏЋжќџгЃ—гЃџг‚‰е­¦зї’г‚’зµ‚дє†
 			if (error < ERR_LIMIT)
 				break;
 		}
@@ -194,7 +194,7 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * Њ‹‰КЋж“ѕ
+	 * зµђжћњеЏ–еѕ—
 	 */
 	public double[] getResult() {
 		return this.O;
@@ -202,11 +202,11 @@ public class NeuralNetwork implements Serializable{
 	}
 
 	/**
-	 * ѓЃѓCѓ“
+	 * гѓЎг‚¤гѓі
 	 *
 	 */
 	public NeuralNetwork() {
-		// Џd‚Э‚рЏ‰Љъ‰»
+		// й‡ЌгЃїг‚’е€ќжњџеЊ–
 		initWeight(W);
 		//ShowWeight(W);
 

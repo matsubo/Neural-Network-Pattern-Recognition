@@ -4,8 +4,8 @@
  *
  */
 /**
- * ƒRƒ“ƒ\[ƒ‹o—Í
- * Log4J‚Ý‚½‚¢‚È‚±‚Æ‚ð‚â‚Á‚Ä‚é
+ * ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›
+ * Log4Jã¿ãŸã„ãªã“ã¨ã‚’ã‚„ã£ã¦ã‚‹
  * 
  * @author Yuki Matsukura <matsu@ht.sfc.keio.ac.jp>
  */
